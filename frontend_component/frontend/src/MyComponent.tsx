@@ -17,8 +17,8 @@ class MyComponent extends StreamlitComponentBase<State> {
   public render = (): ReactNode => {
     // Arguments that are passed to the plugin in Python are accessible
     // via `this.props.args`. Here, we access the "name" arg.
-    const name = this.props.args["name"]
-    const key = this.props.args["key"]
+    const names = this.props.args["name"]
+    const keys = this.props.args["key"]
     console.log("this.props", this.props)
     const stats = names.map((title, i) => ({
       title,
