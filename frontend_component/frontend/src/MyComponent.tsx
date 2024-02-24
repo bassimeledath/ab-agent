@@ -23,50 +23,12 @@ class MyComponent extends StreamlitComponentBase<State, Props> {
     // via `this.props.args`. Here, we access the "name" arg.
     const names = this.props.args["name"]
     const keys = this.props.args["key"]
-    console.log("this.props", this.props)
     const stats = names.map((title, i) => ({
-      title,
-      body: keys[i],
-    }))
-    // Streamlit sends us a theme object via props that we can use to ensure
-    // that our component has visuals that match the active theme in a
-    // streamlit app.
-    const { theme } = this.props
-    const style: React.CSSProperties = {}
-
-    // Maintain compatibility with older versions of Streamlit that don't send
-    // a theme object.
-    if (theme) {
-      // Use the theme object to style our button border. Alternatively, the
-      // theme style is defined in CSS vars.
-      const borderStyling = `1px solid ${
-        this.state.isFocused ? theme.primaryColor : "gray"
-      }`
-      style.border = borderStyling
-      style.outline = borderStyling
-    }
+      title: keys[i],
+      body: title,
+    }));
 
     return <StatList stats={stats} />
-  }
-
-  /** Click handler for our "Click Me!" button. */
-  private onClicked = (): void => {
-    // Increment state.numClicks, and pass the new value back to
-    // Streamlit via `Streamlit.setComponentValue`.
-    this.setState(
-      (prevState) => ({ numClicks: prevState.numClicks + 1 }),
-      () => Streamlit.setComponentValue(this.state.numClicks)
-    )
-  }
-
-  /** Focus handler for our "Click Me!" button. */
-  private _onFocus = (): void => {
-    this.setState({ isFocused: true })
-  }
-
-  /** Blur handler for our "Click Me!" button. */
-  private _onBlur = (): void => {
-    this.setState({ isFocused: false })
   }
 }
 
