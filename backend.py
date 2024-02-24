@@ -21,4 +21,6 @@ def get_backend_response(user_query, csv=False):
         updated_prompt = mistral_text_complete(user_query, sample_size=False)
         return None
 
-    
+def separate_df(df):
+    """Return the browse times for A and B as two data frames."""
+    return df[df['variation'] == 'A']['browse_time'], df[df['variation'] == 'B']['browse_time']
