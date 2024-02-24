@@ -1,0 +1,34 @@
+{
+    "type": "function",
+    "function": {
+        "name": "sample_size_calculator",
+        "description": "Calculates the required sample size for an A/B test based on confidence level, minimum detectable effect (MDE), power, and test type (one-sided or two-sided).",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "confidence": {
+                    "type": "number",
+                    "description": "The confidence level required for the test, typically 0.95 for a 95% confidence level."
+                },
+                "MDE": {
+                    "type": "number",
+                    "description": "Minimum detectable effect size, the smallest effect size of interest that the test is designed to detect."
+                },
+                "power": {
+                    "type": "number",
+                    "description": "The probability of correctly rejecting the null hypothesis when it is false, typically set to 0.8."
+                },
+                "one_sided": {
+                    "type": "boolean",
+                    "description": "Indicates whether the test is one-sided (true) or two-sided (false). Defaults to true if not specified."
+                }
+            },
+            "required": [
+                "confidence",
+                "MDE",
+                "power"
+            ],
+            "additionalProperties": false
+        }
+    }
+}

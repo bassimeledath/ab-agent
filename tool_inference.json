@@ -1,0 +1,20 @@
+{
+    "type": "function",
+    "function": {
+        "name": "interpret_results",
+        "description": "Interprets the results of an A/B test based on the p-value.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "p_value": {
+                    "type": "number",
+                    "description": "The p-value obtained from the A/B test."
+                }
+            },
+            "required": [
+                "p_value"
+            ],
+            "additionalProperties": false
+        }
+    }
+}
