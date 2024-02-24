@@ -50,14 +50,6 @@ col2.markdown("# Statistics go here")
     #with st.expander("Click to read more"):
         #st.write("Hello, here are more details on this topic that you were interested in.")
 
-
-_RELEASE = False
-
-if not _RELEASE:
-    _component_func = components.declare_component(
-        "my_component",
-        url="http://localhost:3001",
-    )
 # Create a wrapper function for the component. This is an optional
 # best practice - we could simply expose the component function returned by
 # `declare_component` and call it done. The wrapper allows us to customize
@@ -95,6 +87,8 @@ def my_component(name, key=None):
     # We could modify the value returned from the component if we wanted.
     # There's no need to do this in our simple example - but it's an option.
     return component_value
+
+_RELEASE = False
 
 if not _RELEASE:
     st.subheader("Component with variable args")
