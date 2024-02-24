@@ -31,9 +31,8 @@ ax.hist(df, bins=20)
 st.pyplot(fig)
 # Take query and upload a file
 col2.line_chart(data=df, x='variation', y='browse_time')
-col1.markdown(" #Welcome to AB Experiment")
+col1.markdown("# Welcome to AB Experiment")
 input = col1.chat_input("Type your query")
-#output = get_backend_response(input, csv=False)
 output = {'Confidence Level': 0.95,
  'Minimum Detectable Effect (MDE)': 0.1,
  'Statistical Power': 0.8,
@@ -45,7 +44,7 @@ def change_csv_state():
 csv_file = col1.file_uploader("Upload a file", on_change= change_csv_state)
 st.session_state["csv"]="none"
 
-col2.markdown(" #Statistics go here")
+col2.markdown("# Statistics go here")
 col2.metric(label="Confidence Level", value=output['Confidence Level'])
 col2.metric(label="Minimum Detectable Effect (MDE)", value=output['Minimum Detectable Effect (MDE)'])
 #col1.slider(label="power")

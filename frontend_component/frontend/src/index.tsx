@@ -7,7 +7,6 @@ import BasicCard from "./CardComponent"
 ReactDOM.render(
   <React.StrictMode>
     <MyComponent />
-    <SignInSide />
   </React.StrictMode>,
   document.getElementById("root")
 )

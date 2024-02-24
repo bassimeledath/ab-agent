@@ -46,24 +46,7 @@ class MyComponent extends StreamlitComponentBase<State, Props> {
       style.outline = borderStyling
     }
 
-    // Show a button and some text.
-    // When the button is clicked, we'll increment our "numClicks" state
-    // variable, and send its new value back to Streamlit, where it'll
-    // be available to the Python program.
-    return (
-      <span>
-        <StatList stats={stats} />
-        <button
-          style={style}
-          onClick={this.onClicked}
-          disabled={this.props.disabled}
-          onFocus={this._onFocus}
-          onBlur={this._onBlur}
-        >
-          Click Me!
-        </button>
-      </span>
-    )
+    return <StatList stats={stats} />
   }
 
   /** Click handler for our "Click Me!" button. */
