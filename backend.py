@@ -18,7 +18,6 @@ def get_backend_response(user_query, csv=False):
 
     else:
         updated_prompt = calculate_significance_and_save("simulated_data.csv", "variation", "browse_time")
-        print(updated_prompt)
         # function_call_agent("interpret the results:" + updated_prompt))
         return ["output_data.csv", "Decision: Go with feature B as is statistically significanlty better than feature A"]
     

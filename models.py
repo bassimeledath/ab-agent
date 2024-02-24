@@ -129,8 +129,6 @@ def function_call_agent(prompt):
         tools=[tool_sample_size_calculator, tool_inference],
         temperature=0
     )
-    print("chat")
-    print(chat_completion)
     
     # Extract the function call and arguments from the response
     function_call = chat_completion.choices[0].message.tool_calls[0].function
