@@ -30,6 +30,7 @@ ax.hist(df, bins=20)
 
 st.pyplot(fig)
 # Take query and upload a file
+col2.markdown("# Statistics go here")
 col2.line_chart(data=df, x='variation', y='browse_time')
 col1.markdown("# Welcome to AB Experiment")
 input = col1.chat_input("Type your query")
@@ -44,7 +45,6 @@ def change_csv_state():
 csv_file = col1.file_uploader("Upload a file", on_change= change_csv_state)
 st.session_state["csv"]="none"
 
-col2.markdown("# Statistics go here")
 col2.metric(label="Confidence Level", value=output['Confidence Level'])
 col2.metric(label="Minimum Detectable Effect (MDE)", value=output['Minimum Detectable Effect (MDE)'])
 #col1.slider(label="power")
@@ -97,7 +97,6 @@ def my_component(name, key=None):
     # There's no need to do this in our simple example - but it's an option.
     return component_value
 
-col2.markdown("# Statistics go here")
 with col2.container():
     _component_func = components.declare_component(
         "my_component",
