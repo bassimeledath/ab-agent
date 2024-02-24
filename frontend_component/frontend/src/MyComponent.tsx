@@ -11,21 +11,6 @@ interface State {
   isFocused: boolean
 }
 
-const names = [
-  "Confidence Level",
-  "Minimum Detectable Effect (MDE)",
-  "Statistical Power",
-  "Test Type",
-  "Sample Size",
-]
-
-const keys = [0.95, 0.1, 0.8, "Two-sided", 392]
-
-const stats = names.map((title, i) => ({
-  title,
-  body: keys[i],
-}))
-
 class MyComponent extends StreamlitComponentBase<State> {
   public state = { numClicks: 0, isFocused: false }
 
@@ -33,8 +18,12 @@ class MyComponent extends StreamlitComponentBase<State> {
     // Arguments that are passed to the plugin in Python are accessible
     // via `this.props.args`. Here, we access the "name" arg.
     const name = this.props.args["name"]
+    const key = this.props.args["key"]
     console.log("this.props", this.props)
-
+    const stats = names.map((title, i) => ({
+      title,
+      body: keys[i],
+    }))
     // Streamlit sends us a theme object via props that we can use to ensure
     // that our component has visuals that match the active theme in a
     // streamlit app.

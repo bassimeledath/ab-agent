@@ -5,6 +5,11 @@ import time
 import pandas as pd
 import streamlit_shadcn_ui as ui
 
+output = {'Confidence Level': 0.95,
+ 'Minimum Detectable Effect (MDE)': 0.1,
+ 'Statistical Power': 0.8,
+ 'Test Type': 'Two-sided',
+ 'Sample Size': 392}
 st.set_page_config(
     page_title="AB Experiment",
     layout="wide"
@@ -98,7 +103,7 @@ if not _RELEASE:
     )
     
     name_input = st.text_input("Enter a name", value="Streamlit")
-    num_clicks = my_component(name_input, key="foo")
+    num_clicks = my_component(name = list(output.values()), key=list(output.keys()))
     st.markdown("You've clicked %s times!" % int(num_clicks))
 else:
     # When we're distributing a production version of the component, we'll
