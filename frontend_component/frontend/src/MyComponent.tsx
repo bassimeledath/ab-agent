@@ -4,11 +4,27 @@ import {
   withStreamlitConnection,
 } from "streamlit-component-lib"
 import React, { ReactNode } from "react"
+import StatList from "./StatList"
 
 interface State {
   numClicks: number
   isFocused: boolean
 }
+
+const names = [
+  "Confidence Level",
+  "Minimum Detectable Effect (MDE)",
+  "Statistical Power",
+  "Test Type",
+  "Sample Size",
+]
+
+const keys = [0.95, 0.1, 0.8, "Two-sided", 392]
+
+const stats = names.map((title, i) => ({
+  title,
+  body: keys[i],
+}))
 
 class MyComponent extends StreamlitComponentBase<State> {
   public state = { numClicks: 0, isFocused: false }
@@ -17,6 +33,7 @@ class MyComponent extends StreamlitComponentBase<State> {
     // Arguments that are passed to the plugin in Python are accessible
     // via `this.props.args`. Here, we access the "name" arg.
     const name = this.props.args["name"]
+    console.log("this.props", this.props)
 
     // Streamlit sends us a theme object via props that we can use to ensure
     // that our component has visuals that match the active theme in a
@@ -43,6 +60,7 @@ class MyComponent extends StreamlitComponentBase<State> {
     return (
       <span>
         Hello, {name}! &nbsp;
+        <StatList stats={stats} />
         <button
           style={style}
           onClick={this.onClicked}
@@ -61,7 +79,7 @@ class MyComponent extends StreamlitComponentBase<State> {
     // Increment state.numClicks, and pass the new value back to
     // Streamlit via `Streamlit.setComponentValue`.
     this.setState(
-      prevState => ({ numClicks: prevState.numClicks + 1 }),
+      (prevState) => ({ numClicks: prevState.numClicks + 1 }),
       () => Streamlit.setComponentValue(this.state.numClicks)
     )
   }
