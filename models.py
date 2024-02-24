@@ -6,10 +6,16 @@ import json
 from scipy.stats import norm
 from dotenv import load_dotenv
 from tools import *
+from prompts import *
 import openai
 load_dotenv()
 
-def mistral_text_complete(prompt):
+def mistral_text_complete(prompt, sample_size=True):
+    if sample_size:
+        updated_prompt = get_sample_size_prompt(prompt)
+    else:
+        updated_prompt = prompt  # Or handle differently if sample_size is False
+
     # Initialize the Fireworks client with your API key
     client = Fireworks(api_key=os.getenv('FIREWORKS_API_KEY'))
     
@@ -18,7 +24,7 @@ def mistral_text_complete(prompt):
         model="accounts/fireworks/models/mixtral-8x7b-instruct",
         messages=[{
             "role": "user",
-            "content": prompt,
+            "content": updated_prompt,
         }],
         temperature=0
     )
@@ -48,10 +54,23 @@ def pandas_agent_complete(query, df):
     return response
 
 def function_call_agent(prompt):
+    def sample_size_calculator(confidence=0.95, MDE=0.05, power=0.8, one_sided=False):
+        alpha = 1 - confidence
+        beta = 1 - power
+        if one_sided:
+            Z_alpha = norm.ppf(1 - alpha)
+        else:
+            Z_alpha = norm.ppf(1 - alpha / 2)
+        Z_beta = norm.ppf(1 - beta)
+        std_dev = 0.5
+        sample_size = ((Z_alpha + Z_beta) ** 2 * (2 * (std_dev ** 2))) / (MDE ** 2)
+        
+        return round(sample_size)
+
     # Load tools configuration from tools.json
     with open('tools.json', 'r') as file:
         tools = json.load(file)
-    
+    print(tools)
     client = openai.OpenAI(
         base_url="https://api.fireworks.ai/inference/v1",
         api_key=os.getenv("FIREWORKS_API_KEY")
@@ -65,9 +84,10 @@ def function_call_agent(prompt):
     chat_completion = client.chat.completions.create(
         model="accounts/fireworks/models/firefunction-v1",
         messages=messages,
-        tools=tools,
+        tools=[tools],
         temperature=0
     )
+    print(chat_completion)
     
     # Extract the function call and arguments from the response
     function_call = chat_completion.choices[0].message.tool_calls[0].function
