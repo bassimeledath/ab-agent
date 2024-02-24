@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 from tools import *
 from prompts import *
 import openai
+import matplotlib.pyplot as plt
 load_dotenv()
 
 def mistral_text_complete(prompt, sample_size=True):
@@ -67,6 +68,20 @@ def function_call_agent(prompt):
         sample_size = ((Z_alpha + Z_beta) ** 2 * (2 * (std_dev ** 2))) / (MDE ** 2)
         
         return round(sample_size)
+
+    def hists(df):
+        a_df = df[df['variation'] == 'A']['browse_time']
+        b_df = df[df['variation'] == 'B']['browse_time']
+
+        plt.figure()
+        plt.hist(a_df)
+        plt.savefig('a_hist.png')
+
+        plt.figure()
+        plt.hist(b_df)
+        plt.savefig('b_hist.png')
+
+        return ['a_hist.png', 'b_hist.png']
 
     # Load tools configuration from tools.json
     with open('tools.json', 'r') as file:
