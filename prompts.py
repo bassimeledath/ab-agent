@@ -8,6 +8,7 @@ def get_sample_size_prompt(user_query):
     Design an A/B test to evaluate the impact of a new homepage layout on user engagement, measured by click-through rate (CTR). We aim for a minimum detectable effect (MDE) of 5% increase in CTR with a confidence level of 95%.
 
     ### Expected Output
+    Task: Sample Size Calculation
     Confidence Level: 0.95
     Minimum Detectable Effect (MDE): 0.05
     Statistical Power: 0.8
