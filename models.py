@@ -7,8 +7,8 @@ from scipy.stats import norm
 from dotenv import load_dotenv
 from tools import *
 from prompts import *
-import openai
 import matplotlib.pyplot as plt
+import openai
 load_dotenv()
 
 def mistral_text_complete(prompt, sample_size=True):
@@ -46,13 +46,27 @@ def pandas_agent_complete(query, df):
     - The response from executing the query on the DataFrame.
     """
     # Initialize the PandasQueryEngine with the provided DataFrame and verbosity enabled
-    query_engine = PandasQueryEngine(df=df, verbose=True)
+    query_engine = PandasQueryEngine(df=df, verbose=False)
     
     # Execute the query and store the response
     response = query_engine.query(query)
     
     # Return the response obtained from the query
     return response
+
+def hists(df):
+        a_df = df[df['variation'] == 'A']['browse_time']
+        b_df = df[df['variation'] == 'B']['browse_time']
+
+        plt.figure()
+        plt.hist(a_df)
+        plt.savefig('a_hist.png')
+
+        plt.figure()
+        plt.hist(b_df)
+        plt.savefig('b_hist.png')
+
+        return ['a_hist.png', 'b_hist.png']
 
 def function_call_agent(prompt):
     ## tools
@@ -68,20 +82,6 @@ def function_call_agent(prompt):
         sample_size = ((Z_alpha + Z_beta) ** 2 * (2 * (std_dev ** 2))) / (MDE ** 2)
         
         return round(sample_size)
-
-    def hists(df):
-        a_df = df[df['variation'] == 'A']['browse_time']
-        b_df = df[df['variation'] == 'B']['browse_time']
-
-        plt.figure()
-        plt.hist(a_df)
-        plt.savefig('a_hist.png')
-
-        plt.figure()
-        plt.hist(b_df)
-        plt.savefig('b_hist.png')
-
-        return ['a_hist.png', 'b_hist.png']
 
     # Load tools configuration from tools.json
     with open('tools.json', 'r') as file:
