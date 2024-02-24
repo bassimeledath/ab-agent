@@ -10,8 +10,12 @@ interface State {
   numClicks: number
   isFocused: boolean
 }
+type Props = {
+  name: string[]
+  key: string[]
+}
 
-class MyComponent extends StreamlitComponentBase<State> {
+class MyComponent extends StreamlitComponentBase<State, Props> {
   public state = { numClicks: 0, isFocused: false }
 
   public render = (): ReactNode => {
@@ -48,7 +52,6 @@ class MyComponent extends StreamlitComponentBase<State> {
     // be available to the Python program.
     return (
       <span>
-        Hello, {name}! &nbsp;
         <StatList stats={stats} />
         <button
           style={style}
