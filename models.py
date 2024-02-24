@@ -55,18 +55,18 @@ def pandas_agent_complete(query, df):
     return response
 
 def hists(df):
-        a_df = df[df['variation'] == 'A']['browse_time']
-        b_df = df[df['variation'] == 'B']['browse_time']
+    a_df = df[df['variation'] == 'A']['browse_time']
+    b_df = df[df['variation'] == 'B']['browse_time']
 
-        plt.figure()
-        plt.hist(a_df)
-        plt.savefig('a_hist.png')
+    plt.figure()
+    plt.hist(a_df)
+    plt.savefig('a_hist.png')
 
-        plt.figure()
-        plt.hist(b_df)
-        plt.savefig('b_hist.png')
+    plt.figure()
+    plt.hist(b_df)
+    plt.savefig('b_hist.png')
 
-        return ['a_hist.png', 'b_hist.png']
+    return ['a_hist.png', 'b_hist.png']
 
 def function_call_agent(prompt):
     ## tools
