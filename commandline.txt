@@ -1,0 +1,4 @@
+cd frontend_component/frontend
+npm install
+npm install @mui/material @mui/icons-material @mui/x-charts @emotion/react @emotion/styled --legacy-peer-deps
+npm start
