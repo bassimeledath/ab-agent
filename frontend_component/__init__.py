@@ -4,8 +4,6 @@ import streamlit as st
 import time
 import pandas as pd
 import streamlit_shadcn_ui as ui
-from my_component.backend import *
-from backend import *
 import matplotlib.pyplot as plt
 import numpy as np
 
