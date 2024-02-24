@@ -24,7 +24,7 @@ st.markdown("""<style>
 col1, col2 = st.columns([1,2])
 # Take query and upload a file
 
-col1.markdown(" #Welcome to AB Experiment")
+col1.markdown("# Welcome to AB Experiment")
 col1.chat_input("Type your query")
 def change_csv_state():
     st.session_state["csv"]="done"
@@ -33,7 +33,7 @@ def change_csv_state():
 csv_file = col1.file_uploader("Upload a file", on_change= change_csv_state)
 
 
-col2.markdown(" #Statistics go here")
+col2.markdown("# Statistics go here")
 #col1.slider(label="power")
 
 #col2.plotly_chart(figure_or_data=plotly.graph_objs.Data)
