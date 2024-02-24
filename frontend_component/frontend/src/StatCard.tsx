@@ -6,7 +6,7 @@ import { Stat } from "./StatList"
 
 export default function StatCard({ title, body }: Stat) {
   return (
-    <Card sx={{ minWidth: 275, marginBottom: '5em' }}>
+    <Card sx={{ minWidth: 275  }}>
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           {title}

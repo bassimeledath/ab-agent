@@ -1,10 +1,10 @@
 import {
-  Streamlit,
   StreamlitComponentBase,
   withStreamlitConnection,
 } from "streamlit-component-lib"
 import React, { ReactNode } from "react"
 import StatList from "./StatList"
+import { Grid } from "@mui/material"
 
 interface State {
   numClicks: number
@@ -28,7 +28,11 @@ class MyComponent extends StreamlitComponentBase<State, Props> {
       body: title,
     }));
 
-    return <StatList stats={stats} />
+    return (
+      <Grid container spacing={2}>
+        <StatList stats={stats} />
+      </Grid>
+    )
   }
 }
 
