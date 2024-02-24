@@ -4,8 +4,12 @@ npm install @mui/material @mui/icons-material @mui/x-charts @emotion/react @emot
 npm start
 
 on a separate terminal
-
+pip install streamlit
 pip install streamlit-shadcn-ui
+pip install -q llama-index-embeddings-fireworks
+pip install -q llama-index-vector-stores-chroma llama-index-llms-fireworks
+
+pip install -q llama-index
 python -m venv .venv
 source .venv/bin/activate
 streamlit run __init__.py
