@@ -29,9 +29,9 @@ col1, col2 = st.columns([1,2])
 if "csv" not in st.session_state:
     st.session_state["csv"]="none"
 # Take query and upload a file
-col2.markdown("# Statistics go here")
+col2.markdown("## Statistics go here")
 #col2.line_chart(data=df, x='variation', y='browse_time')
-col1.markdown("# Welcome to AB Experiment")
+col1.markdown("## Welcome to AB Experiment")
 input = col1.chat_input("Type your query")
 if "prompt" not in st.session_state:
     st.session_state["prompt"]="none"
@@ -126,4 +126,8 @@ with col2.container():
         my_component(name = [], key=[])
     if st.session_state["csv"] == "done":
         output = get_backend_response('', True)
-        col2.markdown(f'<h3 class="big-font">{output[1]}</h3>', unsafe_allow_html=True)
+        name = [output[1].split(":")[0]]
+        key = [output[1].split(":")[1]]
+        my_component(name = key, key=name)
+        df = pd.read_csv(output[0])
+        col2.table(df)
